@@ -1,0 +1,124 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-blush: var(--blush);
+  --color-cream: var(--cream);
+  --color-cocoa: var(--cocoa);
+  --color-rose: var(--rose);
+  --font-display: "Caveat", cursive;
+  --font-body: "Quicksand", sans-serif;
+}
+
+:root {
+  --radius: 1.25rem;
+
+  /* Soft cozy pastel palette */
+  --background: oklch(0.97 0.02 60);            /* warm cream */
+  --foreground: oklch(0.35 0.06 30);            /* cocoa text */
+
+  --cream: oklch(0.96 0.03 75);
+  --blush: oklch(0.88 0.07 15);                 /* pink */
+  --rose:  oklch(0.78 0.12 12);                 /* deeper rose */
+  --cocoa: oklch(0.45 0.07 40);                 /* light brown */
+
+  --card: oklch(0.98 0.02 60 / 0.85);
+  --card-foreground: oklch(0.35 0.06 30);
+  --popover: oklch(0.98 0.02 60);
+  --popover-foreground: oklch(0.35 0.06 30);
+
+  --primary: oklch(0.78 0.12 12);               /* rose */
+  --primary-foreground: oklch(0.99 0.01 60);
+  --secondary: oklch(0.92 0.04 55);             /* beige */
+  --secondary-foreground: oklch(0.4 0.07 35);
+  --muted: oklch(0.93 0.03 60);
+  --muted-foreground: oklch(0.5 0.05 35);
+  --accent: oklch(0.88 0.07 15);                /* blush */
+  --accent-foreground: oklch(0.35 0.07 30);
+  --destructive: oklch(0.65 0.2 25);
+  --destructive-foreground: oklch(0.99 0.01 60);
+  --border: oklch(0.88 0.04 50);
+  --input: oklch(0.9 0.03 50);
+  --ring: oklch(0.78 0.12 12);
+
+  --gradient-cozy: linear-gradient(160deg, oklch(0.96 0.04 75) 0%, oklch(0.9 0.07 20) 60%, oklch(0.85 0.08 30) 100%);
+  --gradient-sunset: linear-gradient(135deg, oklch(0.92 0.06 60), oklch(0.85 0.1 15));
+  --shadow-soft: 0 20px 50px -20px oklch(0.65 0.12 20 / 0.35);
+  --shadow-glow: 0 0 40px oklch(0.85 0.15 15 / 0.5);
+}
+
+.dark {
+  --background: oklch(0.25 0.04 30);
+  --foreground: oklch(0.96 0.02 60);
+  --primary: oklch(0.85 0.1 15);
+  --primary-foreground: oklch(0.25 0.04 30);
+  --border: oklch(0.4 0.05 30);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html, body { font-family: var(--font-body); }
+  body {
+    background: var(--gradient-cozy);
+    color: var(--color-foreground);
+    min-height: 100vh;
+  }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: 0.01em; }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .text-balance { text-wrap: balance; }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .bg-cozy { background: var(--gradient-cozy); }
+  .bg-sunset { background: var(--gradient-sunset); }
+}
+
+@keyframes float-up {
+  0% { transform: translateY(110vh) translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-10vh) translateX(var(--drift, 30px)) rotate(360deg); opacity: 0; }
+}
+.animate-float-up { animation: float-up linear infinite; }
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(180deg); }
+}
+.animate-sparkle { animation: sparkle ease-in-out infinite; }
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+.animate-wiggle { animation: wiggle 3s ease-in-out infinite; }
